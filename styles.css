@@ -1,0 +1,87 @@
+h1{
+    text-align: center;
+}
+
+html,body{
+    width: 100%;
+    margin: 0;
+}
+
+.container{
+    width: 900px;
+    margin: auto;
+}
+
+.code-block{
+    font-family: monospace;
+    background-color: #bbb;
+    padding: 10px 30px;
+    border-radius: 10px;
+}
+
+.code-block > pre {
+    margin: 0px;
+}
+
+.example-holder > div.example-section {
+    float: left;
+    width: 46%;
+    padding: 2px 1%;
+    min-height: 160px;
+    padding: 15px 0px;
+}
+
+.footer{
+    padding-top: 40px;
+    text-align: center;
+    min-height: 60px;
+    width: 80%;
+    margin: auto
+}
+
+.example-holder{
+    float: left;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin-top: 25px;
+}
+
+.example-section > label{
+    font-weight: 600;
+}
+
+.example-section > .code-block{
+    margin-top: 15px;
+}
+
+.numerical-result {
+    vertical-align: middle;
+    font-size: 38px;
+    text-align: center;
+}
+
+table{
+    width: 100%;
+}
+
+th{
+    font-size: 18px;
+}
+
+td{
+    padding: 5px 12px;
+}
+
+tr, td{
+    border:none;
+}
+
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+tr:nth-child(odd) {
+    background-color: #e2e2e2
+}

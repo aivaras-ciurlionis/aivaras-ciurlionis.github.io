@@ -1,1 +1,509 @@
-Hello World
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <script src="test.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <h1>Math chart - component for mathematical functions charts</h1>
+      <div>
+        <canvas id="testCanvas" height="300" width="900"></canvas>
+      </div>
+      <h2>1. Quick start</h2>
+      <p>
+        Install it using npm or yarn:
+        <div class="code-block">
+          <p>
+            npm install math-charts --save<br>
+            yarn add math-charts --save
+          </p>
+        </div>
+      </p>
+      <p>
+        Import FunctionsGraph class to your project:
+        <div class="code-block">
+          <p>
+            import { FunctionsGraph } from 'math-chart';
+          </p>
+        </div>
+      </p>
+      <p>
+        Set chart container using desired html canvas element id:
+        <div class="code-block">
+          <p>
+            let graph = new FunctionsGraph();<br>
+            graph.SetContainer('testCanvas');
+          </p>
+        </div>
+      </p>
+      <p>
+        Set starting viewport (X axis start, Y axis start and scale) and add
+        some functions:
+        <div class="code-block">
+          <p>
+            graph.SetViewport(-8, -2, 1);<br>
+            graph.AddFunction('x^2');<br>
+            graph.AddFunction('lg(-x)');<br>
+            graph.AddFunction('ln(x+3)');<br>
+          </p>
+        </div>
+      </p>
+      <p>
+        Draw a graph!
+        <div class="code-block">
+          <p>
+            graph.Draw();
+          </p>
+        </div>
+      </p>
+      <p>
+        Graph can be panned using mouse and resized using mouse wheel.
+      </p>
+      <h2>2. Examples</h2>
+      <div class="examples">
+
+        <div class="example-holder">
+          <div class="example-section">
+            <label>
+              Evaluate mathematical expressions:
+            </label>
+            <div class="code-block">
+              <p>
+                import { Interpreter } from 'math-chart';<br>
+                <br>
+                let interpreter = new Interpreter();<br>
+                interpreter<br>
+                .ExecuteExpression('100-4*20-(4+1)');
+              </p>
+            </div>
+          </div>
+          <div class="example-section">
+            <div class="numerical-result" style="line-height: 160px">
+              Result: 15
+            </div>
+          </div>
+        </div>
+
+        <div class="example-holder">
+          <div class="example-section">
+            <label>
+              Evaluate expressions with variables:
+            </label>
+            <div class="numerical-result" style="line-height: 117px">
+              Result: 0
+            </div>
+          </div>
+          <div class="example-section">
+
+            <div class="code-block">
+              <p>
+                import { Interpreter } from 'math-chart';<br>
+                <br>
+                let interpreter = new Interpreter();<br>
+                interpreter<br>
+                .EvaluateExpression('x^2+14-y', {x:6, y:50});
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="example-holder">
+          <div class="example-section">
+            <label>
+              Evaluate mathematical expressions without explicit multiplication:
+            </label>
+            <div class="code-block">
+              <p>
+                import { Interpreter } from 'math-chart';<br>
+                <br>
+                let interpreter = new Interpreter();<br>
+                interpreter<br>
+                .EvaluateExpression('2(q+2)+3(q-1)', {q:2});
+              </p>
+            </div>
+          </div>
+          <div class="example-section">
+            <div class="numerical-result" style="line-height: 165px">
+              Result: 11
+            </div>
+          </div>
+        </div>
+
+        <div class="example-holder">
+          <div class="example-section">
+            <label>
+              Draw graph with multiple functions
+            </label>
+            <canvas id="graph2" height="300" width="400"></canvas>
+          </div>
+          <div class="example-section">
+            <div class="code-block" style="margin-top: 80px">
+              <p>
+                import { FunctionsGraph } from 'math-chart';<br>
+                let graph2 = new FunctionsGraph();<br>
+                graph2.SetContainer('graph2');<br>
+                graph2.SetViewport(-4, -3, 1);<br>
+                graph2.AddFunction('x^3');<br>
+                graph2.AddFunction('sqrt(x+2)');<br>
+                graph2.AddFunction('2/x');<br>
+                graph2.Draw();
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="example-holder">
+          <div class="example-section">
+            <label>
+              Static graph
+            </label>
+            <div class="code-block" style="margin-top: 80px">
+              <p>
+                import { FunctionsGraph } from 'math-chart';<br>
+                let graph3 = new FunctionsGraph({canResize: false, canMove:
+                false});<br>
+                graph3.SetContainer('graph3');<br>
+                graph3.SetViewport(-1, -2, 1);<br>
+                graph3.AddFunction('x-3');<br>
+                graph3.AddFunction('-x+4');<br>
+                graph3.Draw();
+              </p>
+            </div>
+          </div>
+          <div class="example-section">
+            <canvas id="graph3" height="300" width="400"></canvas>
+          </div>
+
+        </div>
+
+        <div class="example-holder">
+          <div class="example-section">
+            <label>
+              No grid or labels
+            </label>
+            <canvas id="graph4" height="300" width="400"></canvas>
+          </div>
+          <div class="example-section">
+
+            <div class="code-block" style="margin-top: 80px">
+              <p>
+                import { FunctionsGraph } from 'math-chart';<br>
+                let graph4 = new FunctionsGraph({drawGrid: false,
+                drawGridLabels: false});<br>
+                graph4.SetContainer('graph4');<br>
+                graph4.SetViewport(-1, -2, 1);<br>
+                graph4.AddFunction('x^(x-3)');<br>
+                graph4.AddFunction('x^4+2x^3-6x^2');<br>
+                graph4.Draw();
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="example-holder">
+
+          <div class="example-section">
+            <label>
+              Custom colors and font
+            </label>
+            <div class="code-block" style="margin-top: 20px">
+              <p>
+                import { FunctionsGraph } from 'math-chart';<br>
+                <br>
+                let functionColors = ['#ad8708','#edbd1e','#ffd64f'];<br>
+                let graph5 = new FunctionsGraph({ functionColors:
+                functionColors, labelFont: '12px monospace', gridColor:
+                '#c8daf7'});<br>
+                graph5.SetContainer('graph5');<br>
+                graph5.SetViewport(-1, -2, 1);<br>
+                graph5.AddFunction('x^3-3x^2+1');<br>
+                graph5.AddFunction('2^x');<br>
+                graph5.AddFunction('sin(x)+x');<br>
+                graph5.Draw();
+              </p>
+            </div>
+          </div>
+          <div class="example-section">
+            <canvas id="graph5" height="300" width="400"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <div>
+        <h2>3. API</h2>
+        <h3>Interpreter</h3>
+        <sub>Allows numerical evalutation of functions with or without variables</sub>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Operation</th>
+                <th>Explanation</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>CreateExpression(expression: string):IExpression</pre>
+                  </td>
+                  <td>Parses given string expression to computable expression
+                    that can be executed by math chart plugin. Called internally
+                    by execute
+                    and evaluate expression
+                    methods</td>
+                </tr>
+                <tr>
+                  <td>
+                    <pre>ExecuteExpression(expression: string): number</pre>
+                  </td>
+                  <td>Executes numerical expression (without variables)</td>
+                </tr>
+                <tr>
+                  <td>
+                    <pre>ExecuteParsedExpression(expression: IExpression): number
+                    </pre>
+                  </td>
+                  <td>Executes parsed numerical expression (without variables),
+                    parsed with CreateExpression method</td>
+                </tr>
+                <tr>
+                  <td>
+                    <pre>EvaluateExpression(expression: string, replacementDictionary: any): number
+                    </pre>
+                  </td>
+                  <td>Evaluates string expression result using given variable
+                    replacement values. For example, {x: 2, y : 4}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <pre>EvaluateParsedExpression(expression: IExpression, replacementDictionary: any): number
+                    </pre>
+                  </td>
+                  <td>Evaluates parsed expression result using given variable
+                    replacement values. For example, {x: 2, y : 4}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Functions graph</h3>
+          <sub>Manages all graph drawing</sub>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Operation</th>
+                  <th>Explanation</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <pre>SetContainer(container: string)</pre>
+                    </td>
+                    <td>Sets a graph container to a given canvas element id.</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <pre>AddFunction(functionExpression: string)</pre>
+                    </td>
+                    <td>Adds a new function to a graph</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <pre>RemoveFunction(index: number)</pre>
+                    </td>
+                    <td>Removes a function from a graph by given index</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <pre>SetEvaluationBoundaries(start: number, step: number, count: number)</pre>
+                    </td>
+                    <td>Sets functions evaluation boundaries. Start defines
+                      starting x value, step defines functions smootness, count
+                      - number of function evaluation steps</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <pre>SetViewport(startX: number, startY: number, scale: number = 1)</pre>
+                    </td>
+                    <td>Sets graph viewport. startX - starting value on X axis
+                      (on the left); startY - starting value on Y axis (on the
+                      bottom); scale - Graph's scale</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <pre>Draw()</pre>
+                    </td>
+                    <td>Explicitly redraws graph with all functions</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <pre>UpdateSettings(newSettings: any)</pre>
+                    </td>
+                    <td>Updates existing graph settings. If any setting is not
+                      passed, its default value is used (see below)</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <h3>Functions graph configuration</h3>
+            <sub>Configuration, passed via FunctionsGraph constructor or
+              UpdateSettingsMethod</sub>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Setting</th>
+                    <th>Type</th>
+                    <th>Role</th>
+                    <th>Default value</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><pre>drawGrid</pre></td>
+                      <td>Boolean</td>
+                      <td>Draw a graph grid</td>
+                      <td><pre>true</pre></td>
+                    </tr>
+                    <tr>
+                      <td><pre>drawFunctions</pre></td>
+                      <td>Boolean</td>
+                      <td>Draw graph functions</td>
+                      <td><pre>true</pre></td>
+                    </tr>
+                    <tr>
+                      <td><pre>gridColor</pre></td>
+                      <td>String - color hex</td>
+                      <td>Color of a graph grid</td>
+                      <td><pre>#75ea88</pre></td>
+                    </tr>
+                    <tr>
+                      <td><pre>labelColor</pre></td>
+                      <td>String - color hex</td>
+                      <td>Color of graph labels</td>
+                      <td><pre>#000</pre></td>
+                    </tr>
+                    <tr>
+                      <td><pre>drawGridLabels</pre></td>
+                      <td>Boolean</td>
+                      <td>Draw graph labels</td>
+                      <td><pre>true</pre></td>
+                    </tr>
+                    <tr>
+                      <td><pre>labelFont</pre></td>
+                      <td>String - font</td>
+                      <td>Font of graph labels</td>
+                      <td><pre>14px serif</pre></td>
+                    </tr>
+                    <tr>
+                      <td><pre>canResize</pre></td>
+                      <td>Boolean</td>
+                      <td>Can graph be resized using mouse wheel</td>
+                      <td><pre>true</pre></td>
+                    </tr>
+                    <tr>
+                      <td><pre>canMove</pre></td>
+                      <td>Boolean</td>
+                      <td>Can graph be panned using mouse drag</td>
+                      <td><pre>true</pre></td>
+                    </tr>
+                    <tr>
+                      <td><pre>functionColors</pre></td>
+                      <td>String[] - array of hex colors</td>
+                      <td>Colors of functions</td>
+                      <td><pre>['#4286f4', '#f44141', '#772f93','#e8a23a']</pre></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h2>4. Available operations</h1>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Operation</th>
+                    <th>Expression</th>
+                    <th>Arity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sum</td>
+                    <td><pre>{x}+{y}</pre></td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>Difference - Subraction</td>
+                    <td><pre>{x}-{y}</pre></td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>Product - Multiplication</td>
+                    <td><pre>{x}*{y}</pre></td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>Quotient - Division</td>
+                    <td><pre>{x}/{y}</pre></td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>Power</td>
+                    <td><pre>{x}^{y}</pre></td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <td>Parenthesis</td>
+                    <td><pre>({x})</pre></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>Square root</td>
+                    <td><pre>sqrt({x})</pre></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>Sin</td>
+                    <td><pre>sin({x})</pre></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>Cos</td>
+                    <td><pre>cos({x})</pre></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>Tan</td>
+                    <td><pre>tan({x})</pre></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>Natural logarithm</td>
+                    <td><pre>ln({x})</pre></td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>Base 10 logarithm</td>
+                    <td><pre>lg({x})</pre></td>
+                    <td>1</td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+            </div>
+
+          </div>
+          <div class="footer">Aivaras Čiurlionis 2018</div>
+
+
+        </body>
+
+      </html>
