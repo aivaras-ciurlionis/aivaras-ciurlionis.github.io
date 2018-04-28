@@ -26,9 +26,8 @@ html,body{
 .example-holder > div.example-section {
     float: left;
     width: 46%;
-    padding: 2px 1%;
+    padding: 2px 1%!important;
     min-height: 160px;
-    padding: 15px 0px;
 }
 
 .footer{
